@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Books & Authors</title>
+        <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+        crossorigin="anonymous"
+      />
+    </head>
+    <body>
+        <div>
+            <h2>{{ thisBook.title }}</h2>
+            <p>ID: {{ thisBook.id }}</p>
+            <p>Description: {{ thisBook.desc }}</p>
+            <p>Authors:</p>
+            <ul>
+                {% for auth in assoc_authors %}
+                <li>{{ auth.first_name }} {{ auth.last_name }}</li>
+                {% endfor %}
+            </ul>
+            <form action='/add_auth_to_book/{{ thisBook.id }}' method='post'>
+                {% csrf_token %}
+                <select name="auth_id">
+                    {% for auth in non_assoc_authors %}
+                    <option value="{{ auth.id }}">{{ auth.first_name }} {{ auth.last_name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Add">
+            </form>
+            
+        </div>
+        <a href="/">Back</a>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"
+  ></script>
+  </body>
+
+</html>

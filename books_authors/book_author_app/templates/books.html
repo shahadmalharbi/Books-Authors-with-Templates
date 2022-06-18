@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Books & Authors</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+    <a href="/authors">Authors Page</a>
+        <div class="row align-items-start">
+        <div class="col">
+        <h2>Add a Book</h2>
+        <form action="/add_book" method="post">
+          {% csrf_token %}
+          <p>Title: <input type="text" name="title" /></p>
+          <p>Description: <textarea name="desc"></textarea></p>
+          <input type="submit" value="Add" />
+        </form>
+      </div>
+      <div class="col">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>Title</td>
+              <td>Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for book in all_books %}
+            <tr>
+              <td>{{ book.id }}</td>
+              <td>{{ book.title }}</td>
+              <td><a href="/books/{{ book.id }}">View</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
